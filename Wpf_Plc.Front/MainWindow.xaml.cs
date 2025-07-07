@@ -20,5 +20,28 @@ namespace Wpf_Plc
         {
             InitializeComponent();
         }
+
+        private void BtnPROG_Click(object sender, RoutedEventArgs e)
+        {
+            if (!Program.IsVisible)
+            {
+                PLC.Visibility = Visibility.Collapsed;
+                Program.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void BtnPLC_Click(object sender, RoutedEventArgs e)
+        {
+            if (!PLC.IsVisible)
+            {
+                Program.Visibility = Visibility.Collapsed;
+                PLC.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void BtnEXIT_Click(object sender, RoutedEventArgs e)
+        {
+            return;
+        }
     }
 }
