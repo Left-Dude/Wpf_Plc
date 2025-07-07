@@ -1,0 +1,36 @@
+﻿<Window x:Class="Wpf_Plc.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf_Plc"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Border x:Name="Menu" BorderBrush="Black" BorderThickness="1" Margin="0,0,651,12">
+            <ListBox>
+                <Label Content="PLC Connect&#xD;&#xA;Configure" Height="61" Width="116" FontFamily="Bernard MT Condensed" FontSize="22"/>
+                <Button x:Name="BtnPLC" Content="PLC" Height="43" Width="119"/>
+                <Button x:Name="BtnPROG" Content="Progra" Height="43" Width="119"/>
+                <Button x:Name="BtnEXIT" Content="Exit" Height="43" Width="119"/>
+            </ListBox>
+        </Border>
+        <DataGrid x:Name="PLC" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="149,0,2,12" d:IsHidden="True"/>
+        <Grid x:Name="Program" Margin="149,2,1,12">
+            <Grid x:Name="Prog_list" Margin="0,245,225,0">
+                <ListBox Margin="1,0,0,0">
+                    <Label Content="Label"/>
+                </ListBox>
+            </Grid>
+            <Image HorizontalAlignment="Left" Height="215" Margin="10,10,0,0" VerticalAlignment="Top" Width="636"/>
+            <Grid x:Name="Tool" Margin="442,245,0,0">
+                <CheckBox Content="RS" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <CheckBox Content="Eth" HorizontalAlignment="Left" Margin="139,10,0,0" VerticalAlignment="Top"/>
+                <ComboBox HorizontalAlignment="Center" Margin="0,54,0,0" VerticalAlignment="Top" Width="120"/>
+                <Button Content="LOAD IN!" HorizontalAlignment="Center" Margin="0,132,0,0" VerticalAlignment="Top" Height="35" Width="120"/>
+            </Grid>
+        </Grid>
+        <ProgressBar HorizontalAlignment="Center" Height="10" Margin="0,424,0,0" VerticalAlignment="Top" Width="798"/>
+
+    </Grid>
+</Window>
