@@ -1,4 +1,8 @@
-﻿// IP и порт
+﻿using System.Net;
+using System.Net.Sockets;
+using System.Text;
+
+// IP и порт
 IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
 int port = 9600;
 
