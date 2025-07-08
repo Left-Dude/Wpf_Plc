@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using Wpf_Plc.Application.SLAVE;
 
 // IP и порт
 IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
@@ -46,3 +47,22 @@ finally
 {
     listener.Stop();
 }
+
+static void SendToPLC(string message, string plcIp, int plcPort)
+{
+    try
+    {
+        using (TcpClient plcClient = new TcpClient(plcIp, plcPort))
+        using (NetworkStream plcStream = plcClient.GetStream())
+        {
+            byte[] data = Encoding.ASCII.GetBytes(message);
+            plcStream.Write(data, 0, data.Length);
+            Console.WriteLine($"Данные отправлены на ПЛК ({plcIp}:{plcPort}): {message}");
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Ошибка при отправке на ПЛК: {ex.Message}");
+    }
+}
+
