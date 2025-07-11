@@ -2,47 +2,53 @@
 using System.Net.Sockets;
 using System.Text;
 
-// IP и порт
-IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
-int port = 9600;
-
-TcpListener listener = new TcpListener(ipAddress, port);
-
-try
+/*
+public void DoSth()
 {
-    listener.Start();
-    Console.WriteLine($"Сервер запущен на {ipAddress}:{port}");
+    // IP и порт
+    IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
+    int port = 9600;
 
-    while (true)
+    TcpListener listener = new TcpListener(ipAddress, port);
+
+    try
     {
-        Console.WriteLine("Ожидание подключения клиента...");
-        TcpClient client = listener.AcceptTcpClient();
-        Console.WriteLine("Клиент подключен!");
+        listener.Start();
+        Console.WriteLine($"Сервер запущен на {ipAddress}:{port}");
 
-        NetworkStream stream = client.GetStream();
+        while (true)
+        {
+            Console.WriteLine("Ожидание подключения клиента...");
+            TcpClient client = listener.AcceptTcpClient();
+            Console.WriteLine("Клиент подключен!");
 
-        // Отправка handshake-сообщения клиенту
-        string handshakeMessage = "HANDSHAKE_OK";
-        byte[] handshakeBytes = Encoding.UTF8.GetBytes(handshakeMessage);
-        stream.Write(handshakeBytes, 0, handshakeBytes.Length);
-        Console.WriteLine("Handshake отправлен клиенту.");
+            NetworkStream stream = client.GetStream();
 
-        // Чтение данных от клиента
-        byte[] buffer = new byte[1024];
-        int bytesRead = stream.Read(buffer, 0, buffer.Length);
-        string clientMessage = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-        Console.WriteLine($"Получено от клиента: {clientMessage}");
+            // Отправка handshake-сообщения клиенту
+            string handshakeMessage = "HANDSHAKE_OK";
+            byte[] handshakeBytes = Encoding.UTF8.GetBytes(handshakeMessage);
+            stream.Write(handshakeBytes, 0, handshakeBytes.Length);
+            Console.WriteLine("Handshake отправлен клиенту.");
 
-        // Закрытие соединения
-        stream.Close();
-        client.Close();
+            // Чтение данных от клиента
+            byte[] buffer = new byte[1024];
+            int bytesRead = stream.Read(buffer, 0, buffer.Length);
+            string clientMessage = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+            Console.WriteLine($"Получено от клиента: {clientMessage}");
+
+            // Закрытие соединения
+            stream.Close();
+            client.Close();
+        }
     }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Ошибка: {ex.Message}");
+    }
+    finally
+    {
+        listener.Stop();
+    }
+
 }
-catch (Exception ex)
-{
-    Console.WriteLine($"Ошибка: {ex.Message}");
-}
-finally
-{
-    listener.Stop();
-}
+*/
