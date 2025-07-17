@@ -15,9 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf_Plc.Infrastructure", "W
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{092E036C-F184-4B2A-9F90-D08429A1409C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C93B996B-DD9F-44C6-8B6A-9E6E8A36FC13}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{A8714DC3-9BCC-46E7-B9E2-A930EB2B7198}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".src", ".src", "{C93B996B-DD9F-44C6-8B6A-9E6E8A36FC13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

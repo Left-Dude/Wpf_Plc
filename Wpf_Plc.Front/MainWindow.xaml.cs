@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Wpf_Plc.Infrastructure;
 
 namespace Wpf_Plc
 {
@@ -16,9 +17,16 @@ namespace Wpf_Plc
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly PlcAppContext _context = new();
+        
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            _context.Database.EnsureCreated();
         }
 
         private void BtnPROG_Click(object sender, RoutedEventArgs e)
