@@ -9,4 +9,11 @@
     <RootNamespace>Wpf_Plc</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Fonts\**" />
+    <EmbeddedResource Remove="Fonts\**" />
+    <None Remove="Fonts\**" />
+    <Page Remove="Fonts\**" />
+  </ItemGroup>
+
 </Project>

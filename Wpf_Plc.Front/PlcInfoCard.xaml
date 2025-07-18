@@ -1,0 +1,150 @@
+﻿<UserControl x:Class="Wpf_Plc.PlcInfoCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="1200">
+
+    <!-- Анимация появления (FadeIn) -->
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <!-- Прозрачность от 0 до 1 -->
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                      From="0" To="1" Duration="0:0:1.0"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
+    
+    
+
+    <!-- Border с анимацией при наведении -->
+    <Border x:Name="CardBorder" Background="White" CornerRadius="5" Padding="10">
+        <StackPanel>
+            <!-- Стиль для всех TextBlock внутри -->
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="FontFamily" Value="DM sans"/>
+                </Style>
+            </StackPanel.Resources>
+
+            <!-- Заголовок контроллера -->
+            <TextBlock x:Name="TitleTextBlock" 
+                       Text="PLC" 
+                       FontSize="24" 
+                       FontWeight="Bold" 
+                       Margin="0,0,0,5"/>
+
+            <!-- Параметры контроллера -->
+            <TextBlock Text="• ПРОИЗВОДИТЕЛЬ" Margin="0,10,0,0" FontSize="16"/>
+            <TextBlock Text="• МОДЕЛЬ" Margin="0,5,0,0" FontSize="16"/>
+            <TextBlock Text="• КОЛИЧЕСТВО ВХОДОВ" Margin="0,5,0,0" FontSize="16"/>
+            <TextBlock Text="• КОЛИЧЕСТВО ВЫХОДОВ" Margin="0,5,0,0" FontSize="16"/>
+            <TextBlock Text="• ВОЗМОЖНОСТЬ ПОДКЛЮЧЕНИЯ ПЛАТ РАСПРОЩЕНИЙ (BOOL?)" Margin="0,5,0,0" FontSize="16"/>
+            <TextBlock Text="• ТИП ПИТАНИЯ (ПЕРЕМЕННОЕ ИЛИ ПОСТОЯННОЕ)" Margin="0,5,0,0" FontSize="16"/>
+            <TextBlock Text="• ЗНАЧЕНИЯ НАПРЯЖЕНИЯ ПИТАНИЯ" Margin="0,5,0,0" FontSize="16"/>
+            <TextBlock Text="• РИСУНКИ КОНТРОЛЕРОВ?" Margin="0,5,0,0" FontSize="16"/>
+            <TextBlock Text="• ССЫЛКА НА САЙТ ПРОИЗВОДИТЕЛЯ" Margin="0,5,0,0" FontSize="16"/>
+            <TextBlock Text="• ТИП СОЕДИНЕНИЯ:" Margin="0,5,0,0" FontSize="16"/>
+            <StackPanel Orientation="Horizontal" Margin="20,5,0,0">
+                <TextBlock Text="• RS" Margin="0,0,10,0" FontSize="16"/>
+                <TextBlock Text="• ETHERNET" FontSize="16"/>
+            </StackPanel>
+            
+            
+            <Button Grid.Row="1"
+                Content="ЗАГРУЗИТЬ ПРОГРАММУ"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Margin="0,15,0,0"
+                Width="200"
+                Height="40"
+                Background="#DDDDDD"
+                Foreground="Black"
+                FontFamily="DM sans" 
+                FontSize="14"
+                FontWeight="Bold"
+                BorderBrush="Transparent">
+
+                
+            </Button>
+
+        </StackPanel>
+        
+        
+
+        <!-- Анимация при наведении мыши -->
+        <Border.Style>
+            <Style TargetType="Border">
+                <!-- Установка начального эффекта -->
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect Opacity="0" BlurRadius="0" ShadowDepth="0" Direction="90"/>
+                    </Setter.Value>
+                </Setter>
+
+                <!-- Анимация при наведении -->
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Trigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <!-- Изменение отступов -->
+                                    <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                                         From="0" To="10,0,10,0"
+                                                         Duration="0:0:0.3"/>
+
+                                    <!-- Прозрачность фона -->
+                                    <DoubleAnimation Storyboard.TargetProperty="Background.Opacity"
+                                                      From="1.0" To="0.95"
+                                                      Duration="0:0:0.2"/>
+
+                                    <!-- Анимация появления тени -->
+                                    <DoubleAnimation Storyboard.TargetProperty="Effect.(DropShadowEffect.Opacity)"
+                                                      To="0.4"
+                                                      Duration="0:0:0.3"/>
+                                    <DoubleAnimation Storyboard.TargetProperty="Effect.(DropShadowEffect.BlurRadius)"
+                                                      To="10"
+                                                      Duration="0:0:0.3"/>
+                                    <DoubleAnimation Storyboard.TargetProperty="Effect.(DropShadowEffect.ShadowDepth)"
+                                                      To="5"
+                                                      Duration="0:0:0.3"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.EnterActions>
+
+                        <!-- Обратная анимация при уходе курсора -->
+                        <Trigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                                         From="10,0,10,0" To="0"
+                                                         Duration="0:0:0.3"/>
+                                    <DoubleAnimation Storyboard.TargetProperty="Background.Opacity"
+                                                      From="0.95" To="1.0"
+                                                      Duration="0:0:0.2"/>
+                                    <DoubleAnimation Storyboard.TargetProperty="Effect.(DropShadowEffect.Opacity)"
+                                                      To="0"
+                                                      Duration="0:0:0.3"/>
+                                    <DoubleAnimation Storyboard.TargetProperty="Effect.(DropShadowEffect.BlurRadius)"
+                                                      To="0"
+                                                      Duration="0:0:0.3"/>
+                                    <DoubleAnimation Storyboard.TargetProperty="Effect.(DropShadowEffect.ShadowDepth)"
+                                                      To="0"
+                                                      Duration="0:0:0.3"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.ExitActions>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+    </Border>
+    
+</UserControl>
+    
+    
