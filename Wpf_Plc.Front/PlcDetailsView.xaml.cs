@@ -10,11 +10,11 @@ namespace Wpf_Plc
             InitializeComponent();
         }
 
-        //вот эта залупа криво работает:
-        //private void BtnPROG_Click(object sender, RoutedEventArgs e)
-        //{
-          //  MainContent.Content = new ProgramView();
-        //}
+        //вот эта залупа криво работает (31 строка в PlcDetailsView заправляет):
+        private void BtnPROG_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new ProgramView();
+        }
 
         private void BtnEXIT_Click(object sender, RoutedEventArgs e)
         {
