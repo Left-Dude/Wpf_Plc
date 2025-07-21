@@ -21,5 +21,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Wpf_Plc.Infrastructure\Wpf_Plc.Infrastructure.csproj" />
   </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Wpf_Plc.Application\Wpf_Plc.Application.csproj" />
+	</ItemGroup>
 
 </Project>

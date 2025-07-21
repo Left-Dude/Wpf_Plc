@@ -9,4 +9,12 @@ public class PLCProgram : BaseEntity
     //Связи
     public Guid PLCDeviceId { get; set; }
     public PLCDevice PLCDevice { get; set; }
+
+    //Файл .cpx 
+    public byte[] CpxFileData { get; set; }
+    public string CpxFileName { get; set; }
+
+    //Cхема на программу
+    public byte[] SchemeImageData { get; set; }
+    public string SchemeFileName { get; set; }
 }

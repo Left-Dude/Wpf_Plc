@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -17,16 +18,16 @@ namespace Wpf_Plc
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly PlcAppContext _context = new();
+        private readonly PlcAppContext _context;
         
         public MainWindow()
         {
             InitializeComponent();
+            _context = App.DbContext;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            _context.Database.EnsureCreated();
         }
 
         private void BtnPROG_Click(object sender, RoutedEventArgs e)
