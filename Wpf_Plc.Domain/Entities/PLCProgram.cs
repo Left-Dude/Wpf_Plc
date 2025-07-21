@@ -7,6 +7,6 @@ public class PLCProgram : BaseEntity
     public long SizeBytes { get; set; }
 
     //Связи
-    public Guid PLCDeviceId { get; set; }
+    public int PLCDeviceId { get; set; }
     public PLCDevice PLCDevice { get; set; }
 }
