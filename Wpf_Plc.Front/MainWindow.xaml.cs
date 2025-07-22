@@ -12,9 +12,6 @@ using Wpf_Plc.Application;
 
 namespace Wpf_Plc
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -22,27 +19,21 @@ namespace Wpf_Plc
             InitializeComponent();
         }
 
-        private void BtnPROG_Click(object sender, RoutedEventArgs e)
-        {
-            if (!Program.IsVisible)
-            {
-                PLC.Visibility = Visibility.Collapsed;
-                Program.Visibility = Visibility.Visible;
-            }
-        }
-
         private void BtnPLC_Click(object sender, RoutedEventArgs e)
         {
-            if (!PLC.IsVisible)
-            {
-                Program.Visibility = Visibility.Collapsed;
-                PLC.Visibility = Visibility.Visible;
-            }
+            // Показываем информацию о PLC
+            MainContent.Content = new PlcDetailsView();
+        }
+
+        private void BtnPROG_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new ProgramView();
         }
 
         private void BtnEXIT_Click(object sender, RoutedEventArgs e)
         {
-            return;
+            // Закрытие приложения
+            System.Windows.Application.Current.Shutdown();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

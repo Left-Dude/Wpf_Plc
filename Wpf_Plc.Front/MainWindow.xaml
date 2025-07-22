@@ -5,36 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wpf_Plc"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize">
-    <Grid>
-        <Grid x:Name="Menu">
-            <ListBox Margin="1,1,0,1" HorizontalAlignment="Left" Width="147">
-                <Label Content="PLC Connect&#xA;Configure" Height="61" Width="116" FontFamily="Bernard MT Condensed" FontSize="22"/>
-                <Button x:Name="BtnPLC" Content="PLC" Height="43" Width="119" Click="BtnPLC_Click"/>
-                <Button x:Name="BtnPROG" Content="Progra" Height="43" Width="119" Click="BtnPROG_Click"/>
-                <Button x:Name="BtnEXIT" Content="Exit" Height="43" Width="119" Click="BtnEXIT_Click"/>
-            </ListBox>
-        </Grid>
-        <DataGrid x:Name="PLC" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="149,0,2,12" d:IsHidden="True"/>
-        <Grid x:Name="Program" Margin="149,2,1,12">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="214*"/>
-                <RowDefinition Height="207*"/>
-            </Grid.RowDefinitions>
-            <Grid x:Name="Prog_list" Grid.Row="1">
-                <ListBox Margin="1,0,0,0">
-                    <Label Content="Label"/>
-                </ListBox>
-            </Grid>
-            <Image HorizontalAlignment="Left" Height="215" Margin="10,10,0,0" VerticalAlignment="Top" Width="636" Grid.RowSpan="2"/>
-            <Grid x:Name="Tool" Margin="442,31,0,0" Grid.Row="1">
-                <CheckBox Content="RS" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <CheckBox Content="Eth" HorizontalAlignment="Left" Margin="139,10,0,0" VerticalAlignment="Top"/>
-                <ComboBox HorizontalAlignment="Center" Margin="0,54,0,0" VerticalAlignment="Top" Width="120"/>
-                <Button Content="LOAD IN!" HorizontalAlignment="Center" Margin="0,114,0,0" VerticalAlignment="Top" Height="35" Width="120" Click="Button_Click"/>
-            </Grid>
-        </Grid>
-        <ProgressBar HorizontalAlignment="Center" Height="10" Margin="0,424,0,0" VerticalAlignment="Top" Width="798"/>
+        Title="ControlLink" Height="675" Width="1400" ResizeMode="NoResize">
 
+    <!-- Основной Grid заполняет всё окно -->
+    <Grid Background="#1400AA">
+        <!-- Контент по центру -->
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <!-- Заголовок -->
+            <TextBlock Width="400"
+                       Height="150"
+                       FontFamily="Nico Moji"
+                       FontSize="64"
+                       Background="#1400AA" 
+                       Foreground="White"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Right"
+                       TextAlignment="Right"
+                       Padding="0"
+            >
+                <Run Text="CONTROL"/>
+                <LineBreak/>
+                <Run Text="LINK"/>
+            </TextBlock>
+            <Button Content="PLC" Width="150" Height="51" Click="BtnPLC_Click" Margin="0,0,0,15" FontFamily="DM sans" FontSize="24" FontWeight="Bold"  Background="Transparent" BorderBrush="Transparent" Foreground="White"/>
+            <Button Content="Progra" Width="150" Height="51" Click="BtnPROG_Click" Margin="0,0,0,15" FontFamily="DM sans" FontSize="24" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Foreground="White"/>
+            <Button Content="Exit" Width="150" Height="51" Click="BtnEXIT_Click" FontFamily="DM sans" FontSize="24" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Foreground="White"/>
+        </StackPanel>
+        <ContentControl x:Name="MainContent" Margin="10" />
     </Grid>
 </Window>

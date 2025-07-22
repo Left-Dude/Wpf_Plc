@@ -7,19 +7,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <RootNamespace>Wpf_Plc</RootNamespace>
+    <ApplicationIcon>assets\icon.ico</ApplicationIcon>
   </PropertyGroup>
-
-  <ItemGroup>
-    <COMReference Include="AutoItX3Lib">
-      <VersionMinor>0</VersionMinor>
-      <VersionMajor>1</VersionMajor>
-      <Guid>f8937e53-d444-4e71-9275-35b64210cc3b</Guid>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>false</Isolated>
-      <EmbedInteropTypes>true</EmbedInteropTypes>
-    </COMReference>
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoItX.Dotnet" Version="3.3.14.5" />
@@ -28,5 +17,21 @@
   <ItemGroup>
     <ProjectReference Include="..\Wpf_Plc.Application\Wpf_Plc.Application.csproj" />
   </ItemGroup>
+    
+  <ItemGroup>
+    <Compile Remove="Fonts\**" />
+    <EmbeddedResource Remove="Fonts\**" />
+    <None Remove="Fonts\**" />
+    <Page Remove="Fonts\**" />
+  </ItemGroup>
 
-</Project>    
+  <ItemGroup>
+    <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.11.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Wpf_Plc.Domain\Wpf_Plc.Domain.csproj" />
+    <ProjectReference Include="..\Wpf_Plc.Infrastructure\Wpf_Plc.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
