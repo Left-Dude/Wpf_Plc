@@ -1,119 +1,109 @@
-﻿using System.Diagnostics;
-using System.Runtime.InteropServices;
+﻿using System.Net;
+using System.Net.Sockets;
 using System.Text;
+using System.Windows.Automation;
+using System.Diagnostics;
+
 namespace Wpf_Plc.Application;
 
-public class CxProgrammerAutomation
-{
-    // Импорт функций AutoIt
-    [DllImport("AutoItX3.dll", EntryPoint = "AU3_WinActivate")]
-    public static extern void WinActivate(string title, string text);
-
-    [DllImport("AutoItX3.dll", EntryPoint = "AU3_ControlClick")]
-    public static extern void ControlClick(string title, string text, string control, string button, int clicks);
-
-
-    [DllImport("AutoItX3.dll", EntryPoint = "AU3_Send", CharSet = CharSet.Unicode)]
-    public static extern void Send(string keys, int nMode = 0);
-
-    [DllImport("AutoItX3.dll", EntryPoint = "AU3_WinWait")]
-    public static extern int WinWait(string title, string text, int timeout);
-
-    [DllImport("AutoItX3.dll", EntryPoint = "AU3_WinWaitActive")]
-    public static extern int WinWaitActive(string title, string text, int timeout);
-
-    [DllImport("AutoItX3.dll", EntryPoint = "AU3_ControlCommand")]
-    public static extern IntPtr ControlCommand(string title, string text, string control, string command, string extra, StringBuilder result, int bufSize);
-
-    const int AutoItTimeout = 300;
-
-    const string _Ip = "1921682501";
-
-    public void LoadProgram()
+    public class OmronFinsService
     {
-        try
+        public void LoadTest()
         {
-            // Смена раскладки
-            /* InputLanguage newLanguage = InputLanguage.FromCulture(new CultureInfo("en-US"));
-            InputLanguage.CurrentInputLanguage = newLanguage;
-            */
+            // Убедись, что CX-Programmer запущен
+            Process.Start("cmd.exe", "/C start \"\" \"D:\\cxprog\\CX-Programmer\\CX-P.exe\" \"C:\\Users\\NoMoneySlave\\Desktop\\program.cxp\"");
+            Thread.Sleep(8000); // Ждем запуска
 
-            //Запуск CX Programmer с проектом (Сейчас локальный)
-            //Process.Start("cmd.exe", "/C start \"\" \"D:\\cxprog\\CX-Programmer\\CX-P.exe\" \"C:\\Users\\NoMoneySlave\\Desktop\\program.cxp\"");
-            Thread.Sleep(2000);
+            // Получаем главное окно
+            var root = AutomationElement.RootElement;
+            var cxWindow = root.FindFirst(TreeScope.Children,
+                new PropertyCondition(AutomationElement.NameProperty, "program - CX-Programmer"));
 
-            //Активация окна CX Programmer
-            WinActivate("CX-Programmer - program.cxp", "");
-            Thread.Sleep(1000);
-
-            Send("{Alt}");
-            Thread.Sleep(AutoItTimeout);
-
-            Send("{к}");
-            Thread.Sleep(AutoItTimeout);
-
-            Send("{Enter}");
-            Thread.Sleep(AutoItTimeout);
-
-            Send("{с}");
-            Thread.Sleep(AutoItTimeout);
-
-            for (int i = 0; i <= 7; i++)
+            if (cxWindow == null)
             {
-                Send("{Up}");
-                Thread.Sleep(AutoItTimeout);
+                Console.WriteLine("Окно CX-Programmer не найдено.");
+                return;
             }
 
-            Send("{Tab}");
-            Thread.Sleep(AutoItTimeout);
+            Console.WriteLine("Окно CX-Programmer найдено. Ищем меню 'ПЛК'...");
 
-            Send("{Enter}");
-            Thread.Sleep(AutoItTimeout);
+            // Ищем строку меню
+            var menuBar = cxWindow.FindFirst(TreeScope.Descendants,
+                new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.MenuBar));
 
-            Send("+{Tab}");
-            Thread.Sleep(AutoItTimeout);
-
-            Send("{Right}");
-            Thread.Sleep(AutoItTimeout);
-
-            for (int i = 0; i <= 1; i++)
+            if (menuBar == null)
             {
-                Send("{Tab}");
+                Console.WriteLine("Строка меню не найдена.");
+                return;
             }
 
-            Send(_Ip);
-            Thread.Sleep(AutoItTimeout);
+            // Находим пункт меню "Система" (или "ПЛК", если у тебя он называется так)
+            var systemMenu = menuBar.FindFirst(TreeScope.Descendants,
+                new PropertyCondition(AutomationElement.NameProperty, "Система")); // замените на "ПЛК", если это нужный пункт
 
-            for (int i = 0; i <= 1; i++)
+            if (systemMenu == null)
             {
-                Send("{Tab}");
-                Thread.Sleep(AutoItTimeout);
+                Console.WriteLine("Меню 'Система' не найдено.");
+                return;
             }
 
-            Send("{Enter}");
-            Thread.Sleep(AutoItTimeout);
+            // Пытаемся раскрыть меню (если поддерживает ExpandCollapsePattern)
+            var expandPattern = systemMenu.GetCurrentPattern(ExpandCollapsePattern.Pattern) as ExpandCollapsePattern;
+            expandPattern?.Expand();
 
-            Send("{Tab}");
-            Thread.Sleep(AutoItTimeout);
+            Thread.Sleep(1000); // небольшая пауза, чтобы UI успел отобразить
 
-            Send("{Enter}");
-            Thread.Sleep(AutoItTimeout);
+            // Получаем все элементы внутри раскрытого меню
+            var submenuItems = systemMenu.FindAll(TreeScope.Descendants,
+                new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.MenuItem));
 
-            Send("^{ц}");
-            Thread.Sleep(AutoItTimeout);
+            Console.WriteLine("Элементы в подменю 'Система':");
 
-            Send("{Tab}");
-            Thread.Sleep(AutoItTimeout);
+            int i = 0;
+            foreach (AutomationElement item in submenuItems)
+            {
+                i++;
+                Console.WriteLine($"[{i}] {item.Current.ControlType.ProgrammaticName}");
+                Console.WriteLine($"     Name: {item.Current.Name}");
+                Console.WriteLine($"     AutomationId: {item.Current.AutomationId}");
+                Console.WriteLine(new string('-', 40));
+            }
 
-            Send("{Enter}");
-            Thread.Sleep(AutoItTimeout);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Ошибка: {ex.Message}");
+            if (i == 0)
+            {
+                Console.WriteLine("Нет вложенных элементов. Возможно, меню не раскрыто.");
+            }
+
+            // Ищем пункт меню "ПЛК"
+            var plcMenu = menuBar.FindFirst(TreeScope.Descendants,
+                new PropertyCondition(AutomationElement.NameProperty, "ПЛК"));
+
+            if (plcMenu == null)
+            {
+                Console.WriteLine("Пункт меню 'ПЛК' не найден.");
+                return;
+            }
+
+            var expand = plcMenu.GetCurrentPattern(ExpandCollapsePattern.Pattern) as ExpandCollapsePattern;
+            expand?.Expand(); // раскрываем меню "ПЛК"
+            Thread.Sleep(500); // небольшая задержка
+
+            // Ищем пункт "Работать в сети" внутри раскрытого меню "ПЛК"
+            var workOnlineItem = plcMenu.FindFirst(TreeScope.Descendants,
+                new PropertyCondition(AutomationElement.NameProperty, "Работать в сети")); // или "Work Online" если англ. локализация
+
+            if (workOnlineItem == null)
+            {
+                Console.WriteLine("Пункт меню 'Работать в сети' не найден.");
+                return;
+            }
+
+            var invoke = workOnlineItem.GetCurrentPattern(InvokePattern.Pattern) as InvokePattern;
+            invoke?.Invoke();
+
+            Console.WriteLine("Пункт 'Работать в сети' успешно вызван!");
         }
     }
-}
 
 
 
