@@ -11,6 +11,10 @@ public class PlcAppContext : DbContext
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite("Data Source=PLC_database.db");
+        var dbFolder = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "Wpf_Plc.Infrastructure");
+        var dbFile = Path.Combine(dbFolder, "PLC_database.db");
+        var fullPath = Path.GetFullPath(dbFile);
+
+        optionsBuilder.UseSqlite($"Data Source={fullPath}");
     }
 }
