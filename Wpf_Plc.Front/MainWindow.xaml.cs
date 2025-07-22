@@ -26,7 +26,7 @@ namespace Wpf_Plc
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            _context.Database.EnsureCreated();
+            //_context.Database.EnsureCreated();
         }
 
         private void BtnPROG_Click(object sender, RoutedEventArgs e)

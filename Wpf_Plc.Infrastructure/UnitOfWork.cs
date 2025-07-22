@@ -32,31 +32,50 @@ public class UnitOfWork : IUnitOfWork
 
     public async Task<int> CommitAsync()
     {
-        return await _context.SaveChangesAsync();
+        return await _context.SaveChangesAsync().ConfigureAwait(false);
     }
 
     public async Task BeginTransactionAsync()
     {
-        _transaction = await _context.Database.BeginTransactionAsync();
+        if (_transaction == null)
+            _transaction = await _context.Database.BeginTransactionAsync()
+                .ConfigureAwait(false);
     }
 
     public async Task CommitTransactionAsync()
     {
-        if (_transaction != null) await _transaction.CommitAsync();
+        if (_transaction != null)
+        {
+            // Коммитим и сразу же очищаем транзакцию
+            await _transaction.CommitAsync().ConfigureAwait(false);
+            await _transaction.DisposeAsync().ConfigureAwait(false);
+            _transaction = null;
+        }
     }
 
     public async Task RollbackAsync()
     {
         if (_transaction != null)
         {
-            await _transaction.RollbackAsync();
-            _transaction = null;
+            try
+            {
+                await _transaction.RollbackAsync().ConfigureAwait(false);
+            }
+            catch
+            {
+                // игнорируем, если транзакция уже была завершена
+            }
+            finally
+            {
+                await _transaction.DisposeAsync().ConfigureAwait(false);
+                _transaction = null;
+            }
         }
     }
 
     public void Dispose()
     {
         _transaction?.Dispose();
-        _context?.Dispose();
+        _context.Dispose();
     }
 }

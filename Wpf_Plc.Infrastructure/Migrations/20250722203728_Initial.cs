@@ -72,7 +72,7 @@ namespace Wpf_Plc.Infrastructure.Migrations
                     OriginalFileName = table.Column<string>(type: "TEXT", nullable: false),
                     SizeBytes = table.Column<long>(type: "INTEGER", nullable: false),
                     FileExtension = table.Column<string>(type: "TEXT", nullable: false),
-                    PLCDeviceId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    PLCModelId1 = table.Column<Guid>(type: "TEXT", nullable: false),
                     Created = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Modified = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
@@ -80,9 +80,9 @@ namespace Wpf_Plc.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_PlcPrograms", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PlcPrograms_PlcDevices_PLCDeviceId",
-                        column: x => x.PLCDeviceId,
-                        principalTable: "PlcDevices",
+                        name: "FK_PlcPrograms_PlcModels_PLCModelId1",
+                        column: x => x.PLCModelId1,
+                        principalTable: "PlcModels",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -93,19 +93,19 @@ namespace Wpf_Plc.Infrastructure.Migrations
                 column: "ModelId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PlcPrograms_PLCDeviceId",
+                name: "IX_PlcPrograms_PLCModelId1",
                 table: "PlcPrograms",
-                column: "PLCDeviceId");
+                column: "PLCModelId1");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "PlcPrograms");
+                name: "PlcDevices");
 
             migrationBuilder.DropTable(
-                name: "PlcDevices");
+                name: "PlcPrograms");
 
             migrationBuilder.DropTable(
                 name: "PlcModels");

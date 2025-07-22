@@ -1,37 +1,50 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Wpf_Plc.Domain.Entities;
 using Wpf_Plc.Domain.Interfaces.Repositories;
 
-namespace Wpf_Plc.Infrastructure.Repositories;
-
-public abstract class BaseRepository<T>(PlcAppContext context) : IRepository<T> where T : BaseEntity
+namespace Wpf_Plc.Infrastructure.Repositories
 {
-    internal readonly PlcAppContext Context = context;
-
-    public void AddEntity(T entity)
+    public abstract class BaseRepository<T> : IRepository<T> where T : BaseEntity
     {
-        Context.Set<T>().Add(entity);
-    }
+        protected readonly PlcAppContext Context;
 
-    public virtual void DeleteEntity(T entity)
-    {
-        Context.Set<T>().Remove(entity);
-    }
+        protected BaseRepository(PlcAppContext context)
+        {
+            Context = context ?? throw new ArgumentNullException(nameof(context));
+        }
 
-    public virtual void UpdateEntity(T entity)
-    {
-        Context.Set<T>().Update(entity);
-    }
+        public void AddEntity(T entity)
+        {
+            Context.Set<T>().Add(entity);
+        }
 
-    public virtual async Task<ICollection<T>> GetAllEntitiesAsync()
-    {
-        return await Context.Set<T>().AsNoTracking().ToListAsync();
-    }
+        public virtual void DeleteEntity(T entity)
+        {
+            Context.Set<T>().Remove(entity);
+        }
 
-    public virtual async Task<T?> GetEntityById(Guid id)
-    {
-        return await Context.Set<T>()
-            .AsNoTracking()
-            .FirstOrDefaultAsync(e => e.Id == id);
+        public virtual void UpdateEntity(T entity)
+        {
+            Context.Set<T>().Update(entity);
+        }
+
+        public virtual async Task<ICollection<T>> GetAllEntitiesAsync()
+        {
+            return await Context.Set<T>()
+                .AsNoTracking()
+                .ToListAsync()
+                .ConfigureAwait(false);
+        }
+
+        public virtual async Task<T?> GetEntityById(Guid id)
+        {
+            return await Context.Set<T>()
+                .AsNoTracking()
+                .FirstOrDefaultAsync(e => e.Id == id)
+                .ConfigureAwait(false);
+        }
     }
 }

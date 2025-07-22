@@ -11,7 +11,7 @@ using Wpf_Plc.Infrastructure;
 namespace Wpf_Plc.Infrastructure.Migrations
 {
     [DbContext(typeof(PlcAppContext))]
-    [Migration("20250722104529_Initial")]
+    [Migration("20250722203728_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -145,7 +145,7 @@ namespace Wpf_Plc.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("PLCDeviceId")
+                    b.Property<Guid>("PLCModelId1")
                         .HasColumnType("TEXT");
 
                     b.Property<long>("SizeBytes")
@@ -153,7 +153,7 @@ namespace Wpf_Plc.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PLCDeviceId");
+                    b.HasIndex("PLCModelId1");
 
                     b.ToTable("PlcPrograms");
                 });
@@ -171,13 +171,13 @@ namespace Wpf_Plc.Infrastructure.Migrations
 
             modelBuilder.Entity("Wpf_Plc.Domain.Entities.PLCProgram", b =>
                 {
-                    b.HasOne("Wpf_Plc.Domain.Entities.PLCDevice", "PLCDevice")
+                    b.HasOne("Wpf_Plc.Domain.Entities.PLCModel", "PLCModel")
                         .WithMany()
-                        .HasForeignKey("PLCDeviceId")
+                        .HasForeignKey("PLCModelId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("PLCDevice");
+                    b.Navigation("PLCModel");
                 });
 #pragma warning restore 612, 618
         }

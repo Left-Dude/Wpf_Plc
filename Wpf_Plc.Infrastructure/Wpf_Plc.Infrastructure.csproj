@@ -20,6 +20,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Migrations\" />
+      <Folder Include="Storage\Database\" />
       <Folder Include="Storage\Programs\" />
     </ItemGroup>
 
