@@ -11,7 +11,7 @@ using Wpf_Plc.Infrastructure;
 namespace Wpf_Plc.Infrastructure.Migrations
 {
     [DbContext(typeof(PlcAppContext))]
-    [Migration("20250722091425_InitialCreate")]
+    [Migration("20250722181319_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
