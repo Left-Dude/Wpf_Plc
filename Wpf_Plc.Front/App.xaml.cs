@@ -7,8 +7,6 @@ namespace Wpf_Plc
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
-    {
-    }
+
 
 }

@@ -16,7 +16,7 @@
             </ListBox>
         </Grid>
         <DataGrid x:Name="PLC" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="149,0,2,12" d:IsHidden="True"/>
-        <Grid x:Name="Program" Margin="149,2,1,12" d:IsHidden="True">
+        <Grid x:Name="Program" Margin="149,2,1,12">
             <Grid.RowDefinitions>
                 <RowDefinition Height="214*"/>
                 <RowDefinition Height="207*"/>
@@ -31,7 +31,7 @@
                 <CheckBox Content="RS" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                 <CheckBox Content="Eth" HorizontalAlignment="Left" Margin="139,10,0,0" VerticalAlignment="Top"/>
                 <ComboBox HorizontalAlignment="Center" Margin="0,54,0,0" VerticalAlignment="Top" Width="120"/>
-                <Button Content="LOAD IN!" HorizontalAlignment="Center" Margin="0,114,0,0" VerticalAlignment="Top" Height="35" Width="120"/>
+                <Button Content="LOAD IN!" HorizontalAlignment="Center" Margin="0,114,0,0" VerticalAlignment="Top" Height="35" Width="120" Click="Button_Click"/>
             </Grid>
         </Grid>
         <ProgressBar HorizontalAlignment="Center" Height="10" Margin="0,424,0,0" VerticalAlignment="Top" Width="798"/>

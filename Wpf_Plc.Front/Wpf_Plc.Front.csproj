@@ -2,11 +2,15 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net9.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <RootNamespace>Wpf_Plc</RootNamespace>
   </PropertyGroup>
 
-</Project>
+  <ItemGroup>
+    <ProjectReference Include="..\Wpf_Plc.Application\Wpf_Plc.Application.csproj" />
+  </ItemGroup>
+
+</Project>    

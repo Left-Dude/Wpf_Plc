@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Wpf_Plc.Application;
 
 namespace Wpf_Plc
 {
@@ -42,6 +43,12 @@ namespace Wpf_Plc
         private void BtnEXIT_Click(object sender, RoutedEventArgs e)
         {
             return;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var automation = new Wpf_Plc.Application.OmronFinsService();
+            automation.LoadTest();
         }
     }
 }
