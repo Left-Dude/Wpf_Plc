@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="Wpf_Plc.PlcDetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Wpf_Plc"
+             mc:Ignorable="d" 
+             d:DesignHeight="675" d:DesignWidth="1400">
+
+    <Grid Background="White">
+        <!-- Основной Grid делится на две колонки -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <!-- Левая панель меню -->
+            <ColumnDefinition/>
+            <!-- Основное содержимое -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Левая панель меню -->
+        <StackPanel Grid.Column="0" Background="#1400AA">
+            <TextBlock Text="МЕНЮ" Foreground="White" Padding="10" FontFamily="DM sans" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <Border Background="#1400AA" Padding="10" Margin="0,10,0,0" HorizontalAlignment="Left">
+                <TextBlock Text="PLC" 
+                   Foreground="#989898" 
+                   FontFamily="DM sans" 
+                   FontWeight="Bold"
+                   VerticalAlignment="Center"/>
+            </Border>
+            <Button Content="ПРОГРАММА" Click="BtnPROG_Click" Foreground="White" FontFamily="DM sans" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Padding="10" Margin="0,10,0,0" HorizontalAlignment="Left"/>
+            <Button Content="ВЫХОД" Click="BtnEXIT_Click" Foreground="White" FontFamily="DM sans" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Padding="10" Margin="0,10,0,0" HorizontalAlignment="Left"/>
+            <ContentControl x:Name="MainContent" Margin="10" />
+        </StackPanel>
+
+        <!-- Основное содержимое -->
+        <Grid Grid.Column="1" Margin="0,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- Заголовок PLC -->
+                <RowDefinition Height="*"/>
+                <!-- Список свойств с прокруткой -->
+                <RowDefinition Height="Auto"/>
+                <!-- Кнопка загрузки программы -->
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            
+            <!-- Список свойств с прокруткой -->
+            <ScrollViewer Grid.Row="1" Margin="10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <StackPanel>
+                    <!-- Блок PLC 1 -->
+                    <local:PlcInfoCard Title="PLC 1" Margin="0, 20, 0, 20"/>
+
+                    <!-- Блок PLC 2 -->
+                    <local:PlcInfoCard Title="PLC 2" Margin="0, 20, 0, 20"/>
+
+                    <!-- Блок PLC 3 -->
+                    <local:PlcInfoCard Title="PLC 3" Margin="0, 20, 0, 20"/>
+                </StackPanel>
+            </ScrollViewer>
+
+
+        </Grid>
+    </Grid>
+</UserControl>

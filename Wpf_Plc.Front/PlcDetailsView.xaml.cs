@@ -1,21 +1,16 @@
 ﻿using System.Windows;
-using System.Windows.Input;
+using System.Windows.Controls;
 
 namespace Wpf_Plc
 {
-    public partial class MainWindow : Window
+    public partial class PlcDetailsView : UserControl
     {
-        public MainWindow()
+        public PlcDetailsView()
         {
             InitializeComponent();
         }
 
-        private void BtnPLC_Click(object sender, RoutedEventArgs e)
-        {
-            // Показываем информацию о PLC
-            MainContent.Content = new PlcDetailsView();
-        }
-
+        //вот эта залупа криво работает (31 строка в PlcDetailsView заправляет):
         private void BtnPROG_Click(object sender, RoutedEventArgs e)
         {
             MainContent.Content = new ProgramView();
