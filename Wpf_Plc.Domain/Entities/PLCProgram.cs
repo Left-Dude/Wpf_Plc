@@ -8,6 +8,6 @@ public class PLCProgram : BaseEntity
     public string FileExtension { get; set; }
 
     //Связи
-    public Guid PLCDeviceId { get; set; }
-    public PLCDevice PLCDevice { get; set; }
+    public PLCModel PLCModel { get; set; }
+    public Guid PLCModelId => this.PLCModel.Id;
 }

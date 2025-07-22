@@ -30,6 +30,8 @@ public abstract class BaseRepository<T>(PlcAppContext context) : IRepository<T> 
 
     public virtual async Task<T?> GetEntityById(Guid id)
     {
-        return await Context.Set<T>().FindAsync(id);
+        return await Context.Set<T>()
+            .AsNoTracking()
+            .FirstOrDefaultAsync(e => e.Id == id);
     }
 }
