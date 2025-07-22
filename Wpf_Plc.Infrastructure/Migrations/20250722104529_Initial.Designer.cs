@@ -11,8 +11,8 @@ using Wpf_Plc.Infrastructure;
 namespace Wpf_Plc.Infrastructure.Migrations
 {
     [DbContext(typeof(PlcAppContext))]
-    [Migration("20250722091425_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250722104529_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -128,6 +128,10 @@ namespace Wpf_Plc.Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("Created")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FileExtension")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("Modified")

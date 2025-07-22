@@ -127,6 +127,10 @@ namespace Wpf_Plc.Infrastructure.Migrations
                     b.Property<DateTime?>("Created")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("FileExtension")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime?>("Modified")
                         .HasColumnType("TEXT");
 

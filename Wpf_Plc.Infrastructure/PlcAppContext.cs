@@ -11,7 +11,8 @@ public class PlcAppContext : DbContext
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var dbFolder = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "Wpf_Plc.Infrastructure");
+        var dbFolder = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..",
+            "Wpf_Plc.Infrastructure", "Storage", "Database");
         var dbFile = Path.Combine(dbFolder, "PLC_database.db");
         var fullPath = Path.GetFullPath(dbFile);
 

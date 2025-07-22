@@ -19,4 +19,8 @@
       <ProjectReference Include="..\Wpf_Plc.Domain\Wpf_Plc.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Storage\Programs\" />
+    </ItemGroup>
+
 </Project>
