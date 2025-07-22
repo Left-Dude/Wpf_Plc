@@ -5,7 +5,22 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
-    </PropertyGroup>
+		<IncludeNativeLibrariesForSelfExtract>True</IncludeNativeLibrariesForSelfExtract>
+	 </PropertyGroup>
+    <ItemGroup>
+      <AdditionalFiles Include="AutoItX3.dll" />
+    </ItemGroup>
+    <ItemGroup>
+      <COMReference Include="AutoItX3Lib">
+        <VersionMinor>0</VersionMinor>
+        <VersionMajor>1</VersionMajor>
+        <Guid>f8937e53-d444-4e71-9275-35b64210cc3b</Guid>
+        <Lcid>0</Lcid>
+        <WrapperTool>tlbimp</WrapperTool>
+        <Isolated>false</Isolated>
+        <EmbedInteropTypes>true</EmbedInteropTypes>
+      </COMReference>
+    </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="System.Management" Version="9.0.6" />
