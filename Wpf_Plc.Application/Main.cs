@@ -6,23 +6,23 @@ namespace Wpf_Plc.Application;
 public class CxProgrammerAutomation
 {
     // Импорт функций AutoIt
-    [DllImport("AutoItX3.dll", EntryPoint = "AU3_WinActivate")]
+    [DllImport("AutoItX3_x64.dll", EntryPoint = "AU3_WinActivate")]
     public static extern void WinActivate(string title, string text);
 
-    [DllImport("AutoItX3.dll", EntryPoint = "AU3_ControlClick")]
+    [DllImport("AutoItX3_x64.dll", EntryPoint = "AU3_ControlClick")]
     public static extern void ControlClick(string title, string text, string control, string button, int clicks);
 
 
-    [DllImport("AutoItX3.dll", EntryPoint = "AU3_Send", CharSet = CharSet.Unicode)]
+    [DllImport("AutoItX3_x64.dll", EntryPoint = "AU3_Send", CharSet = CharSet.Unicode)]
     public static extern void Send(string keys, int nMode = 0);
 
-    [DllImport("AutoItX3.dll", EntryPoint = "AU3_WinWait")]
+    [DllImport("AutoItX3_x64.dll", EntryPoint = "AU3_WinWait")]
     public static extern int WinWait(string title, string text, int timeout);
 
-    [DllImport("AutoItX3.dll", EntryPoint = "AU3_WinWaitActive")]
+    [DllImport("AutoItX3_x64.dll", EntryPoint = "AU3_WinWaitActive")]
     public static extern int WinWaitActive(string title, string text, int timeout);
 
-    [DllImport("AutoItX3.dll", EntryPoint = "AU3_ControlCommand")]
+    [DllImport("AutoItX3_x64.dll", EntryPoint = "AU3_ControlCommand")]
     public static extern IntPtr ControlCommand(string title, string text, string control, string command, string extra, StringBuilder result, int bufSize);
 
     const int AutoItTimeout = 300;
