@@ -1,8 +1,10 @@
 ﻿using System.Diagnostics;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
-namespace Wpf_Plc.Application;
+using System.Windows.Forms;
 
+namespace Wpf_Plc.Application;
 public class CxProgrammerAutomation
 {
     // Импорт функций AutoIt
@@ -25,21 +27,22 @@ public class CxProgrammerAutomation
     [DllImport("AutoItX3_x64.dll", EntryPoint = "AU3_ControlCommand")]
     public static extern IntPtr ControlCommand(string title, string text, string control, string command, string extra, StringBuilder result, int bufSize);
 
-    const int AutoItTimeout = 300;
+    int AutoItTimeout = 50; // Скорость работы (мс)
 
-    const string _Ip = "1921682501";
-
-    public void LoadProgram()
+    public void LoadProgram(string Ip = "1921682501", string Port = "9600", string cxPath = @"D:\cxprog\CX-Programmer\CX-P.exe", string projectPath = @"C:\Users\NoMoneySlave\Desktop\program.cxp")
     {
         try
         {
             // Смена раскладки
-            /* InputLanguage newLanguage = InputLanguage.FromCulture(new CultureInfo("en-US"));
-            InputLanguage.CurrentInputLanguage = newLanguage;
-            */
+            InputLanguage russian = InputLanguage.FromCulture(new CultureInfo("ru-RU"));
+            InputLanguage.CurrentInputLanguage = russian;
 
-            //Запуск CX Programmer с проектом (Сейчас локальный)
-            Process.Start("cmd.exe", "/C start \"\" \"D:\\cxprog\\CX-Programmer\\CX-P.exe\" \"C:\\Users\\NoMoneySlave\\Desktop\\program.cxp\"");
+            // Формируем команду для запуска CX-Programmer с указанным проектом
+            string command = $"/C start \"\" \"{cxPath}\" \"{projectPath}\"";
+
+            // Запускаем через CMD
+            Process.Start("cmd.exe", command);
+
             Thread.Sleep(2000);
 
             //Активация окна CX Programmer
@@ -81,14 +84,17 @@ public class CxProgrammerAutomation
                 Send("{Tab}");
             }
 
-            Send(_Ip);
+            Send(Ip);
             Thread.Sleep(AutoItTimeout);
 
-            for (int i = 0; i <= 1; i++)
-            {
-                Send("{Tab}");
-                Thread.Sleep(AutoItTimeout);
-            }
+            Send("{Tab}");
+            Thread.Sleep(AutoItTimeout);
+
+            Send(Port);
+            Thread.Sleep(AutoItTimeout);
+
+            Send("{Tab}");
+            Thread.Sleep(AutoItTimeout);
 
             Send("{Enter}");
             Thread.Sleep(AutoItTimeout);
