@@ -42,7 +42,11 @@ namespace Wpf_Plc
 
         private void BtnPROG_Click(object sender, RoutedEventArgs e)
         {
-            MainContent.Content = new ProgramView();
+            if (Window.GetWindow(this) is Window wnd
+                && wnd.FindName("MainContent") is ContentControl main)
+            {
+                main.Content = new ProgramView();
+            }
         }
 
         private void BtnEXIT_Click(object sender, RoutedEventArgs e)

@@ -43,6 +43,9 @@ namespace Wpf_Plc
                     "Загрузка программы", 
                     MessageBoxButton.OK, 
                     MessageBoxImage.Information);
+                
+                var automation = new Wpf_Plc.Application.CxProgrammerAutomation();
+                automation.LoadProgram();
             }
         }
     }

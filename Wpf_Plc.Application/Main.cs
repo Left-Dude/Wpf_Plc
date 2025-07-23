@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
+using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
@@ -29,7 +31,9 @@ public class CxProgrammerAutomation
 
     int AutoItTimeout = 50; // Скорость работы (мс)
 
-    public void LoadProgram(string Ip = "1921682501", string Port = "9600", string cxPath = @"D:\cxprog\CX-Programmer\CX-P.exe", string projectPath = @"C:\Users\NoMoneySlave\Desktop\program.cxp")
+    private readonly string _projectPath = GetTestProgramPath();
+
+    public void LoadProgram(string Ip = "1921682501", string Port = "9600", string cxPath = @"D:\cxprog\CX-Programmer\CX-P.exe")
     {
         try
         {
@@ -38,7 +42,7 @@ public class CxProgrammerAutomation
             InputLanguage.CurrentInputLanguage = russian;
 
             // Формируем команду для запуска CX-Programmer с указанным проектом
-            string command = $"/C start \"\" \"{cxPath}\" \"{projectPath}\"";
+            string command = $"/C start \"\" \"{cxPath}\" \"{_projectPath}\"";
 
             // Запускаем через CMD
             Process.Start("cmd.exe", command);
@@ -118,5 +122,17 @@ public class CxProgrammerAutomation
         {
             Console.WriteLine($"Ошибка: {ex.Message}");
         }
+    }
+    
+    private static string GetTestProgramPath()
+    {
+        var assemblyDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        
+        // Путь к корню решения
+        var solutionDir = Path.Combine(
+            assemblyDir, 
+            "..", "..", "..", "..");
+        var testFilesPath = Path.Combine(solutionDir, "Wpf_Plc.Tests", "TestFiles");
+        return Path.Combine(testFilesPath, "test_program.cxp");
     }
 }
