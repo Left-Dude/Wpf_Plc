@@ -3,44 +3,82 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Wpf_Plc"
              mc:Ignorable="d" 
-             d:DesignHeight="675" d:DesignWidth="1400">
+             d:DesignHeight="800" d:DesignWidth="1200"
+             Background="White">
 
-    <Grid Background="White">
-        <!-- Основной Grid делится на две колонки -->
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
-            <!-- Левая панель меню -->
-            <ColumnDefinition/>
-            <!-- Основное содержимое -->
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <!-- Левая панель меню -->
         <StackPanel Grid.Column="0" Background="#1400AA">
-            <TextBlock Text="МЕНЮ" Foreground="White" Padding="10" FontFamily="DM sans" FontWeight="Bold" HorizontalAlignment="Center"/>
-            <Button Content="PLC" Foreground="White" FontFamily="DM sans" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Padding="10" Margin="0,10,0,0" HorizontalAlignment="Left"/>
+            <TextBlock Text="МЕНЮ" Foreground="White" Padding="10" FontFamily="DM Sans" FontWeight="Bold" HorizontalAlignment="Center"/>
             <Border Background="#1400AA" Padding="10" Margin="0,10,0,0" HorizontalAlignment="Left">
-                <TextBlock Text="ПРОГРАММА" 
-       Foreground="#989898" 
-       FontFamily="DM sans" 
-       FontWeight="Bold"
-       VerticalAlignment="Center"/>
+                <TextBlock Text="PLC" Foreground="White" FontFamily="DM Sans" FontWeight="Bold"/>
             </Border>
-            <Button Content="ВЫХОД" Foreground="White" FontFamily="DM sans" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Padding="10" Margin="0,10,0,0" HorizontalAlignment="Left"/>
+            <Button Content="ПРОГРАММА" Click="BtnPROG_Click" Foreground="White" FontFamily="DM Sans" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Padding="10" Margin="0,10,0,0" HorizontalAlignment="Left"/>
+            <Button Content="ВЫХОД" Click="BtnEXIT_Click" Foreground="White" FontFamily="DM Sans" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Padding="10" Margin="0,10,0,0" HorizontalAlignment="Left"/>
+            <ContentControl x:Name="MainContent" Margin="10" />
         </StackPanel>
 
-        <!-- Основное содержимое -->
-        <Grid Grid.Column="1" Margin="0,0,0,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <!-- Заголовок PLC -->
-                <RowDefinition Height="*"/>
-                <!-- Список свойств с прокруткой -->
-                <RowDefinition Height="Auto"/>
-                <!-- Кнопка загрузки программы -->
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-        </Grid>
+        <!-- Правая часть -->
+        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="40,20,40,40" Background="White">
+
+                <!-- Изображение схемы -->
+                <Image Source="assets/schema_traffic_lights.png" Stretch="None" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+
+                <!-- Линия-разделитель -->
+                <Rectangle Height="1" Fill="#CCCCCC" HorizontalAlignment="Stretch" Margin="0,0,0,20"/>
+
+                <!-- Блок: СВЕТОФОР -->
+                <TextBlock Text="СВЕТОФОР" Foreground="Black" FontFamily="DM Sans" FontWeight="Bold"
+                           FontSize="16" Margin="0,0,0,0"/>
+
+                <!-- Блоки: МИГАНИЕ и БЕГУЩИЙ ОГОНЬ -->
+                <TextBlock Text="МИГАНИЕ" Foreground="Black" FontFamily="DM Sans" FontWeight="Bold"
+                           FontSize="16" Margin="0,10,0,0"/>
+
+                <!-- Нижний блок с вертикальной линией-разделителем -->
+                <Grid Margin="0,20,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="1"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Левая часть -->
+                    <StackPanel Grid.Column="0" VerticalAlignment="Top" Margin="0,0,20,0"/>
+
+                    <!-- Вертикальная линия -->
+                    <Rectangle Grid.Column="1" Width="1" Fill="#CCCCCC" Margin="10,0"/>
+
+                    <!-- Правая часть -->
+                    <StackPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right" Margin="20,0,0,0">
+                        <!-- Чекбоксы -->
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <CheckBox Content="RS" FontFamily="DM Sans" FontWeight="Bold" FontSize="14" Margin="0,0,20,0"/>
+                            <CheckBox Content="ETHERNET" FontFamily="DM Sans" FontWeight="Bold" FontSize="14"/>
+                        </StackPanel>
+
+                        <!-- Кнопка ЗАГРУЗИТЬ -->
+                        <Button Content="ЗАГРУЗИТЬ" Width="180" Height="40" HorizontalAlignment="Right"
+                                Background="#E0E0E0" Foreground="Black" FontFamily="DM Sans" FontWeight="Bold"
+                                BorderThickness="0">
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="20">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>

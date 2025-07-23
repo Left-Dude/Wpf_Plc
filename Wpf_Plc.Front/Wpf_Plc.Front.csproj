@@ -17,4 +17,14 @@
     <Page Remove="Fonts\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="assets\schema_traffic_lights.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="assets\schema_traffic_lights.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
 </Project>

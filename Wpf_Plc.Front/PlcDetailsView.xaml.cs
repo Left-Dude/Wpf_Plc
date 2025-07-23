@@ -21,5 +21,6 @@ namespace Wpf_Plc
             // Закрытие приложения
             Application.Current.Shutdown();
         }
+
     }
 }
