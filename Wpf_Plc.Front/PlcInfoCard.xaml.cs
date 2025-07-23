@@ -47,6 +47,9 @@ namespace Wpf_Plc
                 var automation = new Wpf_Plc.Application.CxProgrammerAutomation();
                 automation.LoadProgram();
             }
+
+            var automation = new Wpf_Plc.Application.CxProgrammerAutomation();
+            automation.LoadProgram();
         }
     }
 }
