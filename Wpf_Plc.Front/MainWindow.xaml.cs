@@ -39,8 +39,7 @@ namespace Wpf_Plc
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var automation = new Wpf_Plc.Application.CxProgrammerAutomation();
-            automation.LoadProgram();
+
         }
     }
 }

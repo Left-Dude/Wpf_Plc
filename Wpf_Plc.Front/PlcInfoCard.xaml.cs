@@ -44,6 +44,9 @@ namespace Wpf_Plc
                     MessageBoxButton.OK, 
                     MessageBoxImage.Information);
             }
+
+            var automation = new Wpf_Plc.Application.CxProgrammerAutomation();
+            automation.LoadProgram();
         }
     }
 }

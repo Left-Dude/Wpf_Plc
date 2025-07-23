@@ -23,5 +23,25 @@ namespace Wpf_Plc
             // Закрытие приложения
             System.Windows.Application.Current.Shutdown();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (EthernetCheckBox.IsChecked == true)
+            {
+                var automation = new Wpf_Plc.Application.CxProgrammerAutomation();
+                automation.LoadProgram();
+
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите ETHERNET перед загрузкой программы.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+        
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
