@@ -31,7 +31,7 @@ namespace Wpf_Plc.Infrastructure.Repositories
             Context.Set<T>().Update(entity);
         }
 
-        public virtual async Task<ICollection<T>> GetAllEntitiesAsync()
+        public virtual async Task<List<T>> GetAllEntitiesAsync()
         {
             return await Context.Set<T>()
                 .AsNoTracking()

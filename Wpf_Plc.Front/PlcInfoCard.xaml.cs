@@ -1,31 +1,48 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Navigation;
+using Wpf_Plc.Domain.Entities;
 
 namespace Wpf_Plc
 {
     public partial class PlcInfoCard : UserControl
     {
+        public static readonly DependencyProperty PlcModelProperty =
+            DependencyProperty.Register("PlcModel", typeof(PLCModel), typeof(PlcInfoCard), 
+                new PropertyMetadata(null));
+
+        public PLCModel PlcModel
+        {
+            get => (PLCModel)GetValue(PlcModelProperty);
+            set => SetValue(PlcModelProperty, value);
+        }
+
         public PlcInfoCard()
         {
             InitializeComponent();
         }
 
-        // Свойство для заголовка
-        public string Title
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-            get { return (string)GetValue(TitleProperty); }
-            set { SetValue(TitleProperty, value); }
+            if (!string.IsNullOrWhiteSpace(e.Uri?.AbsoluteUri))
+            {
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = e.Uri.AbsoluteUri,
+                    UseShellExecute = true
+                });
+                e.Handled = true;
+            }
         }
 
-        public static readonly DependencyProperty TitleProperty =
-            DependencyProperty.Register("Title", typeof(string), typeof(PlcInfoCard), new PropertyMetadata("PLC", OnTitleChanged));
-
-        private static void OnTitleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private void LoadProgramButton_Click(object sender, RoutedEventArgs e)
         {
-            var control = d as PlcInfoCard;
-            if (control != null && control.TitleTextBlock != null)
+            if (PlcModel != null)
             {
-                control.TitleTextBlock.Text = e.NewValue as string;
+                MessageBox.Show($"Загрузка программы для контроллера: {PlcModel.Manufacturer} {PlcModel.Model}", 
+                    "Загрузка программы", 
+                    MessageBoxButton.OK, 
+                    MessageBoxImage.Information);
             }
         }
     }

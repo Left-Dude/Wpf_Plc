@@ -7,6 +7,6 @@ public interface IRepository<T> where T : class
     void AddEntity(T entity);
     void DeleteEntity(T entity);
     void UpdateEntity(T entity);
-    Task<ICollection<T>> GetAllEntitiesAsync();
+    Task<List<T>> GetAllEntitiesAsync();
     Task<T?> GetEntityById(Guid id);
 }
