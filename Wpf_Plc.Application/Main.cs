@@ -51,7 +51,7 @@ public class CxProgrammerAutomation
 
             //Активация окна CX Programmer
             WinActivate("CX-Programmer - program.cxp", "");
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
 
             Send("{Alt}");
             Thread.Sleep(AutoItTimeout);
