@@ -13,22 +13,22 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <!-- Заголовок -->
             <TextBlock Width="400"
-           Height="150"
-           FontFamily="Nico Moji"
-           FontSize="64"
-           Background="#1400AA" 
-           Foreground="White"
-           VerticalAlignment="Center"
-           HorizontalAlignment="Right"
-           TextAlignment="Right"
-           Padding="0"
-           >
-    <Run Text="CONTROL"/>
-    <LineBreak/>
-    <Run Text="LINK"/>
+                       Height="150"
+                       FontFamily="Nico Moji"
+                       FontSize="64"
+                       Background="#1400AA" 
+                       Foreground="White"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Right"
+                       TextAlignment="Right"
+                       Padding="0"
+            >
+                <Run Text="CONTROL"/>
+                <LineBreak/>
+                <Run Text="LINK"/>
             </TextBlock>
             <Button Content="PLC" Width="150" Height="51" Click="BtnPLC_Click" Margin="0,0,0,15" FontFamily="DM sans" FontSize="24" FontWeight="Bold"  Background="Transparent" BorderBrush="Transparent" Foreground="White"/>
-            <Button Content="Progra" Width="150" Height="51" Click="BtnPROG_Click" Margin="0,0,0,15" FontFamily="DM sans" FontSize="24" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Foreground="White"/>
+            <Button Content="Program" Width="150" Height="51" Click="BtnPROG_Click" Margin="0,0,0,15" FontFamily="DM sans" FontSize="24" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Foreground="White"/>
             <Button Content="Exit" Width="150" Height="51" Click="BtnEXIT_Click" FontFamily="DM sans" FontSize="24" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Foreground="White"/>
         </StackPanel>
         <ContentControl x:Name="MainContent" Margin="10" />

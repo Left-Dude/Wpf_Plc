@@ -21,7 +21,7 @@ namespace Wpf_Plc
         private void BtnEXIT_Click(object sender, RoutedEventArgs e)
         {
             // Закрытие приложения
-            Application.Current.Shutdown();
+            System.Windows.Application.Current.Shutdown();
         }
     }
 }

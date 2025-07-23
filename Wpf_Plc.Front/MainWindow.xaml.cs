@@ -1,5 +1,15 @@
-﻿using System.Windows;
+﻿using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using Microsoft.VisualStudio.TestPlatform.TestHost;
+using Wpf_Plc.Application;
 
 namespace Wpf_Plc
 {
@@ -24,7 +34,13 @@ namespace Wpf_Plc
         private void BtnEXIT_Click(object sender, RoutedEventArgs e)
         {
             // Закрытие приложения
-            Application.Current.Shutdown();
+            System.Windows.Application.Current.Shutdown();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var automation = new Wpf_Plc.Application.CxProgrammerAutomation();
+            automation.LoadProgram();
         }
     }
 }

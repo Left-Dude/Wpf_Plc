@@ -42,23 +42,17 @@
                 <!-- Кнопка загрузки программы -->
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-
             
             <!-- Список свойств с прокруткой -->
             <ScrollViewer Grid.Row="1" Margin="10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                <StackPanel>
-                    <!-- Блок PLC 1 -->
-                    <local:PlcInfoCard Title="PLC 1" Margin="0, 20, 0, 20"/>
-
-                    <!-- Блок PLC 2 -->
-                    <local:PlcInfoCard Title="PLC 2" Margin="0, 20, 0, 20"/>
-
-                    <!-- Блок PLC 3 -->
-                    <local:PlcInfoCard Title="PLC 3" Margin="0, 20, 0, 20"/>
-                </StackPanel>
+                <ItemsControl x:Name="PlcItemsControl" ItemsSource="{Binding PLCModels}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <local:PlcInfoCard PlcModel="{Binding}" Margin="0,20,0,20"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </ScrollViewer>
-
-
         </Grid>
     </Grid>
 </UserControl>

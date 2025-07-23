@@ -31,5 +31,5 @@ public class PLCModel : BaseEntity
     
     //Ссылки
     [Url]
-    public string ManufecturerURL { get; set; }
+    public string ManufacturerURL { get; set; }
 }

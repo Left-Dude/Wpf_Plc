@@ -10,6 +10,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf_Plc.Tests", "Wpf_Plc.Tests\Wpf_Plc.Tests.csproj", "{67B12155-FE23-41D1-9B7F-A3209B3CAFCB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf_Plc.Application", "Wpf_Plc.Application\Wpf_Plc.Application.csproj", "{803B9CCD-F386-4932-AAD1-891A24262B56}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2F5162E4-2194-40FF-A6E4-53A41528D746} = {2F5162E4-2194-40FF-A6E4-53A41528D746}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf_Plc.Infrastructure", "Wpf_Plc.Infrastructure\Wpf_Plc.Infrastructure.csproj", "{ED6830F6-D3CE-4B6D-989F-2C27CCB9EFAB}"
 EndProject
